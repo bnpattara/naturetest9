@@ -1,0 +1,189 @@
+{%- style -%}
+.testimonials {
+  padding: 80px 0;
+  background-color: var(--color-background-alt);
+}
+
+.testimonials__header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.testimonials__title {
+  font-size: 2.5em;
+  color: var(--color-text);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.testimonials__description {
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.testimonial-card {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card__quote {
+  font-style: italic;
+  color: var(--color-text);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.testimonial-card__author {
+  display: flex;
+  align-items: center;
+}
+
+.testimonial-card__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.testimonial-card__info {
+  flex: 1;
+}
+
+.testimonial-card__name {
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 5px;
+}
+
+.testimonial-card__location {
+  color: var(--color-text-secondary);
+  font-size: 0.9em;
+}
+
+.testimonial-card__rating {
+  color: var(--color-primary);
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .testimonials__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+{%- endstyle -%}
+
+<div class="testimonials">
+  <div class="testimonials__header">
+    <h2 class="testimonials__title">{{ section.settings.title }}</h2>
+    <p class="testimonials__description">{{ section.settings.description }}</p>
+  </div>
+
+  <div class="testimonials__grid">
+    {%- for block in section.blocks -%}
+      <div class="testimonial-card">
+        <div class="testimonial-card__rating">
+          ★★★★★
+        </div>
+        <p class="testimonial-card__quote">{{ block.settings.quote }}</p>
+        <div class="testimonial-card__author">
+          {%- if block.settings.avatar != blank -%}
+            <img 
+              src="{{ block.settings.avatar | img_url: '100x100', crop: 'center' }}"
+              alt="{{ block.settings.name }}"
+              class="testimonial-card__avatar"
+              width="50"
+              height="50"
+              loading="lazy"
+            >
+          {%- endif -%}
+          <div class="testimonial-card__info">
+            <div class="testimonial-card__name">{{ block.settings.name }}</div>
+            <div class="testimonial-card__location">{{ block.settings.location }}</div>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Read what our customers have to say about their experience with NatureBuff products."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "I love how eco-friendly these products are! They work great and I feel good about using them."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer Name",
+          "default": "Sarah Johnson"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Portland, OR"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Customer Avatar"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

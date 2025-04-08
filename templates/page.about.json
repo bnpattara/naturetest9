@@ -1,0 +1,56 @@
+{
+  "sections": {
+    "about_hero": {
+      "type": "about-hero",
+      "settings": {
+        "heading": "Our Story",
+        "subheading": "How NatureBuff is changing the world of sustainable hygiene, one product at a time."
+      }
+    },
+    "our_story": {
+      "type": "our-story",
+      "settings": {
+        "heading": "How It All Started",
+        "story_text": "NatureBuff was born from a simple observation during a hiking trip in 2018. Our founder, Max Velinsky, noticed the amount of non-biodegradable waste left behind on trails—particularly wet wipes and plastic containers from hygiene products.\n\nInspired to make a change, Max began researching sustainable alternatives to conventional hygiene products. He discovered that bamboo-based wipes could provide the same convenience without the environmental impact, and that natural soap bars could eliminate the need for plastic packaging.\n\nAfter two years of development and testing, NatureBuff launched its first products in 2020. Today, we're proud to offer a growing range of sustainable hygiene solutions that help outdoor enthusiasts, travelers, and eco-conscious individuals reduce their environmental footprint without sacrificing cleanliness or convenience."
+      }
+    },
+    "meet_founder": {
+      "type": "meet-founder",
+      "settings": {
+        "heading": "Meet the Founder",
+        "founder_name": "Max Velinsky",
+        "founder_title": "Founder & CEO",
+        "founder_bio": "Max is an avid hiker, environmentalist, and entrepreneur with a background in sustainable product development. Before founding NatureBuff, he worked in the outdoor industry for over a decade, where he witnessed firsthand the impact of non-biodegradable products on natural environments.",
+        "founder_quote": "\"I believe that small changes in our daily habits can lead to significant positive impacts on our planet. At NatureBuff, we're committed to making those changes easier and more accessible for everyone who loves the outdoors as much as we do.\""
+      }
+    },
+    "sustainability": {
+      "type": "sustainability-commitment",
+      "settings": {
+        "heading": "Our Sustainability Commitment",
+        "feature_1_title": "Sustainable Materials",
+        "feature_1_text": "Our Buff Wipes are made from 100% biodegradable bamboo fiber, which grows quickly without pesticides and requires minimal water. Our soap bars use organic, plant-based ingredients that are safe for both you and the environment.",
+        "feature_2_title": "Zero Waste Packaging",
+        "feature_2_text": "We've eliminated plastic from our packaging. Our products come in compostable or recyclable materials, and we're constantly working to reduce our packaging footprint even further.",
+        "feature_3_title": "Environmental Impact",
+        "feature_3_text": "For every purchase, we donate 1% of sales to environmental nonprofits working to protect wild places. We also organize quarterly clean-up events in national parks and wilderness areas."
+      }
+    },
+    "join_mission": {
+      "type": "join-mission",
+      "settings": {
+        "heading": "Join Our Mission",
+        "description": "Ready to make the switch to sustainable hygiene? Explore our products and join thousands of customers who are reducing their environmental impact without compromising on cleanliness.",
+        "button_text": "Shop Now",
+        "button_link": "/collections/all"
+      }
+    }
+  },
+  "order": [
+    "about_hero",
+    "our_story",
+    "meet_founder",
+    "sustainability",
+    "join_mission"
+  ]
+} 

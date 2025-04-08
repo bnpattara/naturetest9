@@ -1,0 +1,112 @@
+{%- style -%}
+.cta {
+  padding: 60px 0;
+  background-color: var(--color-primary-light);
+  text-align: center;
+}
+
+.cta__container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  border-radius: 10px;
+}
+
+.cta__title {
+  color: var(--color-text);
+  font-size: 2em;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.cta__text {
+  color: var(--color-text-secondary);
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.cta__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.cta__button:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.cta__button svg {
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .cta__container {
+    padding: 30px 20px;
+  }
+
+  .cta__title {
+    font-size: 1.8em;
+  }
+}
+{%- endstyle -%}
+
+<div class="cta">
+  <div class="container">
+    <div class="cta__container">
+      <h2 class="cta__title">{{ section.settings.title }}</h2>
+      <p class="cta__text">{{ section.settings.text }}</p>
+      <a href="{{ section.settings.button_link }}" class="cta__button">
+        {{ section.settings.button_text }}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "How It Works CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Ready to Make the Switch?"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Join thousands of customers who've already made the transition to sustainable hygiene with NatureBuff!"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works CTA"
+    }
+  ]
+}
+{% endschema %} 

@@ -1,0 +1,122 @@
+{%- style -%}
+.why-naturebuff {
+  padding: 80px 0;
+  background-color: var(--color-background);
+}
+
+.why-naturebuff__header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.why-naturebuff__title {
+  font-size: 2.5em;
+  color: var(--color-text);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.why-naturebuff__description {
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.why-naturebuff__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.feature {
+  text-align: center;
+}
+
+.feature__icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  color: var(--color-primary);
+}
+
+.feature__title {
+  font-size: 1.2em;
+  color: var(--color-text);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.feature__description {
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+  .why-naturebuff__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+{%- endstyle -%}
+
+<div class="why-naturebuff">
+  <div class="why-naturebuff__header">
+    <h2 class="why-naturebuff__title">{{ section.settings.title }}</h2>
+    <p class="why-naturebuff__description">{{ section.settings.description }}</p>
+  </div>
+
+  <div class="why-naturebuff__grid">
+    <div class="feature">
+      <div class="feature__icon">
+        {% render 'icon-leaf' %}
+      </div>
+      <h3 class="feature__title">Eco-Friendly</h3>
+      <p class="feature__description">All our products are made from sustainable materials and are 100% biodegradable or compostable.</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature__icon">
+        {% render 'icon-package' %}
+      </div>
+      <h3 class="feature__title">Convenient</h3>
+      <p class="feature__description">Designed for on-the-go use, our products are lightweight, compact, and perfect for any adventure.</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature__icon">
+        {% render 'icon-recycle' %}
+      </div>
+      <h3 class="feature__title">Zero Waste</h3>
+      <p class="feature__description">We're committed to minimizing waste with plastic-free packaging and biodegradable materials.</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Why NatureBuff",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Why NatureBuff?"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "We believe that staying clean shouldn't come at the planet's expense. Our products are designed with both performance and sustainability in mind."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why NatureBuff"
+    }
+  ]
+}
+{% endschema %} 

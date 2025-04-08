@@ -1,0 +1,62 @@
+:root {
+  --color-primary: #2A5F4C;
+  --color-secondary: #E5A981;
+  --color-text: #333333;
+  --color-background: #FFFFFF;
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --container-width: 1200px;
+  --spacing-unit: 8px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 calc(var(--spacing-unit) * 2);
+}
+
+.button {
+  display: inline-block;
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+  background-color: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: color-mix(in srgb, var(--color-primary) 80%, black);
+}
+
+.button--secondary {
+  background-color: var(--color-secondary);
+}
+
+.section {
+  padding: calc(var(--spacing-unit) * 8) 0;
+} 

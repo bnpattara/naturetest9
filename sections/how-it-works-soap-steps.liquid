@@ -1,0 +1,172 @@
+{%- style -%}
+.soap-steps {
+  padding: 60px 0;
+  background-color: var(--color-background-alt);
+}
+
+.soap-steps__title {
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--color-text);
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.soap-steps__container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.soap-step {
+  text-align: center;
+}
+
+.soap-step__number {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-weight: 600;
+}
+
+.soap-step__image-container {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.soap-step__image {
+  max-width: 100%;
+  height: auto;
+}
+
+.soap-step__title {
+  margin-bottom: 10px;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.soap-step__description {
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+  .soap-steps__container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+{%- endstyle -%}
+
+<div class="soap-steps">
+  <div class="container">
+    <h2 class="soap-steps__title">{{ section.settings.title }}</h2>
+    
+    <div class="soap-steps__container">
+      {%- for block in section.blocks -%}
+        <div class="soap-step">
+          <div class="soap-step__number">{{ forloop.index }}</div>
+          <div class="soap-step__image-container">
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 300 }}"
+                alt="{{ block.settings.title }}"
+                loading="lazy"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                class="soap-step__image"
+              >
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'soap-step__image placeholder' }}
+            {%- endif -%}
+          </div>
+          <h3 class="soap-step__title">{{ block.settings.title }}</h3>
+          <p class="soap-step__description">{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Natural Soap Bars Steps",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Natural Soap Bars: Plastic-Free Cleansing"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Step Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title",
+          "default": "Store"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step Description",
+          "default": "Keep your soap bar in our bamboo travel container between uses to maintain freshness and prevent mess in your luggage."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Natural Soap Bars Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Store",
+            "description": "Keep your soap bar in our bamboo travel container between uses to maintain freshness and prevent mess in your luggage."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Lather",
+            "description": "Our soap bars create a rich lather that cleanses effectively. They're gentle on skin and safe for use in natural water sources."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Dry",
+            "description": "Allow your soap to dry between uses to extend its life. One bar can last for weeks of regular use, replacing multiple plastic bottles."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

@@ -1,0 +1,234 @@
+{%- style -%}
+.comparison {
+  padding: 60px 0;
+  background-color: var(--color-background);
+}
+
+.comparison__title {
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--color-text);
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.comparison__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.comparison__column {
+  background: var(--color-background-alt);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.comparison__column-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--color-text);
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.comparison__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comparison__item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.comparison__item svg {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  margin-top: 2px;
+}
+
+.comparison__item--negative svg {
+  color: var(--color-error);
+}
+
+.comparison__item--positive svg {
+  color: var(--color-success);
+}
+
+@media screen and (max-width: 768px) {
+  .comparison__container {
+    grid-template-columns: 1fr;
+  }
+}
+{%- endstyle -%}
+
+<div class="comparison">
+  <div class="container">
+    <h2 class="comparison__title">{{ section.settings.title }}</h2>
+    
+    <div class="comparison__container">
+      <div class="comparison__column">
+        <h3 class="comparison__column-title">{{ section.settings.conventional_title }}</h3>
+        <ul class="comparison__list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'conventional' -%}
+              <li class="comparison__item comparison__item--negative">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M15 9l-6 6M9 9l6 6"/>
+                </svg>
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div class="comparison__column">
+        <h3 class="comparison__column-title">{{ section.settings.naturebuff_title }}</h3>
+        <ul class="comparison__list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'naturebuff' -%}
+              <li class="comparison__item comparison__item--positive">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Comparison",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Why Choose NatureBuff?"
+    },
+    {
+      "type": "text",
+      "id": "conventional_title",
+      "label": "Conventional Products Title",
+      "default": "Conventional Products"
+    },
+    {
+      "type": "text",
+      "id": "naturebuff_title",
+      "label": "NatureBuff Products Title",
+      "default": "NatureBuff Products"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "conventional",
+      "name": "Conventional Product Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Point Text",
+          "default": "Contain synthetic materials that take 100+ years to break down"
+        }
+      ]
+    },
+    {
+      "type": "naturebuff",
+      "name": "NatureBuff Product Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Point Text",
+          "default": "Made from biodegradable materials that break down in 4-6 weeks"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Comparison",
+      "blocks": [
+        {
+          "type": "conventional",
+          "settings": {
+            "text": "Contain synthetic materials that take 100+ years to break down"
+          }
+        },
+        {
+          "type": "conventional",
+          "settings": {
+            "text": "Often packaged in single-use plastics"
+          }
+        },
+        {
+          "type": "conventional",
+          "settings": {
+            "text": "May contain harsh chemicals that harm aquatic ecosystems"
+          }
+        },
+        {
+          "type": "conventional",
+          "settings": {
+            "text": "Contribute to landfill waste and ocean pollution"
+          }
+        },
+        {
+          "type": "conventional",
+          "settings": {
+            "text": "Often tested on animals"
+          }
+        },
+        {
+          "type": "naturebuff",
+          "settings": {
+            "text": "Made from biodegradable materials that break down in 4-6 weeks"
+          }
+        },
+        {
+          "type": "naturebuff",
+          "settings": {
+            "text": "Packaged in compostable or recyclable materials"
+          }
+        },
+        {
+          "type": "naturebuff",
+          "settings": {
+            "text": "Formulated with natural ingredients, safe for all environments"
+          }
+        },
+        {
+          "type": "naturebuff",
+          "settings": {
+            "text": "Zero waste approach to reduce environmental impact"
+          }
+        },
+        {
+          "type": "naturebuff",
+          "settings": {
+            "text": "Cruelty-free and never tested on animals"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

@@ -1,0 +1,165 @@
+{%- style -%}
+  .meet-founder {
+    padding: calc(var(--spacing-unit) * 8) 0;
+    background-color: #f9f9f9;
+  }
+
+  .meet-founder__container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: calc(var(--spacing-unit) * 8);
+    align-items: center;
+  }
+
+  .meet-founder__heading {
+    font-size: 2rem;
+    color: var(--color-text);
+    margin-bottom: calc(var(--spacing-unit) * 6);
+    text-align: center;
+  }
+
+  .meet-founder__image-wrapper {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .meet-founder__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .meet-founder__content {
+    max-width: 700px;
+  }
+
+  .meet-founder__name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: calc(var(--spacing-unit));
+    color: var(--color-text);
+  }
+
+  .meet-founder__title {
+    font-size: 1rem;
+    color: var(--color-primary);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+  }
+
+  .meet-founder__bio {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+  }
+
+  .meet-founder__quote {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    font-style: italic;
+    position: relative;
+    padding-left: calc(var(--spacing-unit) * 3);
+    border-left: 4px solid var(--color-primary);
+  }
+
+  @media screen and (max-width: 768px) {
+    .meet-founder__container {
+      grid-template-columns: 1fr;
+      gap: calc(var(--spacing-unit) * 4);
+      text-align: center;
+    }
+
+    .meet-founder__image-wrapper {
+      margin: 0 auto;
+    }
+
+    .meet-founder__content {
+      max-width: 100%;
+    }
+
+    .meet-founder__quote {
+      text-align: left;
+    }
+  }
+{%- endstyle -%}
+
+<div class="meet-founder">
+  <div class="container">
+    <h2 class="meet-founder__heading">{{ section.settings.heading }}</h2>
+    <div class="meet-founder__container">
+      <div class="meet-founder__image-wrapper">
+        {%- if section.settings.founder_image != blank -%}
+          <img
+            srcset="{%- if section.settings.founder_image.width >= 200 -%}{{ section.settings.founder_image | image_url: width: 200 }} 200w{%- endif -%}"
+            src="{{ section.settings.founder_image | image_url: width: 200 }}"
+            alt="{{ section.settings.founder_name }}"
+            loading="lazy"
+            width="{{ section.settings.founder_image.width }}"
+            height="{{ section.settings.founder_image.height }}"
+            class="meet-founder__image"
+          >
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'meet-founder__image placeholder' }}
+        {%- endif -%}
+      </div>
+      <div class="meet-founder__content">
+        <h3 class="meet-founder__name">{{ section.settings.founder_name }}</h3>
+        <p class="meet-founder__title">{{ section.settings.founder_title }}</p>
+        <p class="meet-founder__bio">{{ section.settings.founder_bio }}</p>
+        <blockquote class="meet-founder__quote">{{ section.settings.founder_quote }}</blockquote>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Meet the Founder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Meet the Founder"
+    },
+    {
+      "type": "image_picker",
+      "id": "founder_image",
+      "label": "Founder Image"
+    },
+    {
+      "type": "text",
+      "id": "founder_name",
+      "label": "Founder Name",
+      "default": "Max Velinsky"
+    },
+    {
+      "type": "text",
+      "id": "founder_title",
+      "label": "Founder Title",
+      "default": "Founder & CEO"
+    },
+    {
+      "type": "textarea",
+      "id": "founder_bio",
+      "label": "Founder Bio",
+      "default": "Max is an avid hiker, environmentalist, and entrepreneur with a background in sustainable product development..."
+    },
+    {
+      "type": "textarea",
+      "id": "founder_quote",
+      "label": "Founder Quote",
+      "default": "\"I believe that small changes in our daily habits can lead to significant positive impacts on our planet...\""
+    }
+  ],
+  "presets": [
+    {
+      "name": "Meet the Founder",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %} 

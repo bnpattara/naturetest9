@@ -1,0 +1,102 @@
+{%- style -%}
+  .join-mission {
+    padding: calc(var(--spacing-unit) * 8) 0;
+    background-color: var(--color-secondary);
+    color: white;
+    text-align: center;
+  }
+
+  .join-mission__content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .join-mission__heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    color: white;
+  }
+
+  .join-mission__description {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: calc(var(--spacing-unit) * 4);
+    opacity: 0.9;
+  }
+
+  .join-mission__button {
+    display: inline-block;
+    padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .join-mission__button:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 80%, black);
+  }
+
+  @media screen and (max-width: 768px) {
+    .join-mission__heading {
+      font-size: 2rem;
+    }
+
+    .join-mission__description {
+      font-size: 1.125rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="join-mission">
+  <div class="container">
+    <div class="join-mission__content">
+      <h2 class="join-mission__heading">{{ section.settings.heading }}</h2>
+      <p class="join-mission__description">{{ section.settings.description }}</p>
+      <a href="{{ section.settings.button_link }}" class="join-mission__button">
+        {{ section.settings.button_text }}
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Join Mission",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join Our Mission"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Ready to make the switch to sustainable hygiene? Explore our products and join thousands of customers who are reducing their environmental impact without compromising on cleanliness."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Join Mission",
+      "category": "Call to Action"
+    }
+  ]
+}
+{% endschema %} 

@@ -1,0 +1,263 @@
+{%- style -%}
+.product-comparison {
+  padding: 80px 0;
+  background-color: var(--color-background);
+}
+
+.product-comparison__header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.product-comparison__title {
+  font-size: 2.5em;
+  color: var(--color-text);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.product-comparison__description {
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.product-comparison__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.comparison-card {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-card__header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.comparison-card__title {
+  font-size: 1.5em;
+  color: var(--color-text);
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.comparison-card__image {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto 20px;
+}
+
+.comparison-card__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comparison-card__item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  padding-left: 30px;
+  position: relative;
+}
+
+.comparison-card__item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.comparison-card--conventional .comparison-card__item::before {
+  background: url('{{ 'icon-x.svg' | asset_url }}') center/contain no-repeat;
+}
+
+.comparison-card--naturebuff .comparison-card__item::before {
+  background: url('{{ 'icon-check.svg' | asset_url }}') center/contain no-repeat;
+}
+
+@media screen and (max-width: 768px) {
+  .product-comparison__grid {
+    grid-template-columns: 1fr;
+  }
+}
+{%- endstyle -%}
+
+<div class="product-comparison">
+  <div class="product-comparison__header">
+    <h2 class="product-comparison__title">{{ section.settings.title }}</h2>
+    <p class="product-comparison__description">{{ section.settings.description }}</p>
+  </div>
+
+  <div class="product-comparison__grid">
+    <div class="comparison-card comparison-card--conventional">
+      <div class="comparison-card__header">
+        <h3 class="comparison-card__title">{{ section.settings.conventional_title }}</h3>
+        {%- if section.settings.conventional_image != blank -%}
+          <img 
+            src="{{ section.settings.conventional_image | image_url: width: 200 }}"
+            alt="{{ section.settings.conventional_title }}"
+            class="comparison-card__image"
+            width="200"
+            height="200"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+      <ul class="comparison-card__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'conventional_point' -%}
+            <li class="comparison-card__item">{{ block.settings.text }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <div class="comparison-card comparison-card--naturebuff">
+      <div class="comparison-card__header">
+        <h3 class="comparison-card__title">{{ section.settings.naturebuff_title }}</h3>
+        {%- if section.settings.naturebuff_image != blank -%}
+          <img 
+            src="{{ section.settings.naturebuff_image | image_url: width: 200 }}"
+            alt="{{ section.settings.naturebuff_title }}"
+            class="comparison-card__image"
+            width="200"
+            height="200"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+      <ul class="comparison-card__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'naturebuff_point' -%}
+            <li class="comparison-card__item">{{ block.settings.text }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Comparison",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Natural Soap Bars: Plastic-Free Cleansing"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "See how our sustainable soap bars compare to conventional products"
+    },
+    {
+      "type": "text",
+      "id": "conventional_title",
+      "label": "Conventional Title",
+      "default": "Conventional Products"
+    },
+    {
+      "type": "image_picker",
+      "id": "conventional_image",
+      "label": "Conventional Image"
+    },
+    {
+      "type": "text",
+      "id": "naturebuff_title",
+      "label": "NatureBuff Title",
+      "default": "NatureBuff Products"
+    },
+    {
+      "type": "image_picker",
+      "id": "naturebuff_image",
+      "label": "NatureBuff Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "conventional_point",
+      "name": "Conventional Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Point Text",
+          "default": "Uses plastic packaging that takes centuries to decompose"
+        }
+      ]
+    },
+    {
+      "type": "naturebuff_point",
+      "name": "NatureBuff Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Point Text",
+          "default": "100% plastic-free packaging that's fully biodegradable"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Comparison",
+      "blocks": [
+        {
+          "type": "conventional_point",
+          "settings": {
+            "text": "Uses plastic packaging that takes centuries to decompose"
+          }
+        },
+        {
+          "type": "conventional_point",
+          "settings": {
+            "text": "Contains synthetic chemicals that can harm the environment"
+          }
+        },
+        {
+          "type": "conventional_point",
+          "settings": {
+            "text": "Contributes to landfill waste and ocean pollution"
+          }
+        },
+        {
+          "type": "naturebuff_point",
+          "settings": {
+            "text": "100% plastic-free packaging that's fully biodegradable"
+          }
+        },
+        {
+          "type": "naturebuff_point",
+          "settings": {
+            "text": "Made with natural ingredients safe for you and the environment"
+          }
+        },
+        {
+          "type": "naturebuff_point",
+          "settings": {
+            "text": "Zero waste approach with compostable materials"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 
